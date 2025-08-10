@@ -35,9 +35,13 @@
             animation: pulse 2s infinite;
         }
 
-        /* Modal styles */
+        /* Modal and Admin Panel styles */
         .modal-backdrop {
             background-color: rgba(0, 0, 0, 0.5);
+        }
+
+        #admin-panel {
+            transition: transform 0.3s ease-in-out;
         }
     </style>
 </head>
@@ -62,7 +66,6 @@
                 <a href="#about" class="hover:text-[#FFDF00] font-medium">Sobre</a>
                 <div id="user-session" class="hidden items-center space-x-4">
                     <span id="welcome-message" class="font-medium"></span>
-                    <button id="add-balance-btn" class="bg-[#FFDF00] text-[#002776] px-3 py-1 rounded-md text-sm font-bold hover:bg-yellow-400">Adicionar Saldo (teste)</button>
                     <button id="logout-btn" class="bg-[#009739] text-white px-3 py-1 rounded-md text-sm font-bold hover:bg-green-700">Sair</button>
                 </div>
                 <button id="login-register-btn" class="bg-[#FFDF00] hover:bg-yellow-400 text-[#002776] font-bold py-2 px-4 rounded-full transition duration-300">Login / Cadastro</button>
@@ -80,7 +83,6 @@
                  <button id="login-register-btn-mobile" class="w-full bg-[#FFDF00] hover:bg-yellow-400 text-[#002776] font-bold py-2 px-4 rounded-full transition duration-300">Login / Cadastro</button>
                  <div id="user-session-mobile" class="hidden text-center mt-2">
                     <span id="welcome-message-mobile" class="block font-medium mb-2"></span>
-                    <button id="add-balance-btn-mobile" class="w-full mb-2 bg-[#FFDF00] text-[#002776] px-3 py-2 rounded-md text-sm font-bold hover:bg-yellow-400">Adicionar Saldo (teste)</button>
                     <button id="logout-btn-mobile" class="w-full bg-[#009739] text-white px-3 py-2 rounded-md text-sm font-bold hover:bg-green-700">Sair</button>
                 </div>
             </div>
@@ -114,7 +116,7 @@
                         </div>
                         <div class="p-4 bg-blue-800 bg-opacity-75 rounded-lg hover:bg-opacity-100 transition duration-300">
                             <h3 class="font-bold text-lg">Recorde de audiência na semifinal</h3>
-                            <p class="text-sm">Mais de 50 mil espectadores acompanharam a emocionante partida entre Titans e Warriors.</p>
+                            <p class="text-sm">Mais de 50 mil espectadores acompanharam a emocionante partida entre CLUBE DE REGATAS DO PORCOS e FC VENCEDORES.</p>
                             <a href="#news" class="text-[#FFDF00] text-sm font-medium hover:underline">Ler mais</a>
                         </div>
                     </div>
@@ -181,7 +183,7 @@
                     <div class="p-6">
                         <span class="text-sm text-[#009739]">Mídia</span>
                         <h3 class="text-xl font-bold mt-2 mb-3">Recorde de audiência na semifinal</h3>
-                        <p class="text-gray-600 mb-4">A partida entre Titans e Warriors bateu recorde com mais de 50 mil espectadores simultâneos em nossas plataformas.</p>
+                        <p class="text-gray-600 mb-4">A partida entre CLUBE DE REGATAS DO PORCOS e FC VENCEDORES bateu recorde com mais de 50 mil espectadores simultâneos.</p>
                         <a href="#" class="text-[#002776] font-medium hover:underline">Ler mais →</a>
                     </div>
                 </div>
@@ -196,8 +198,57 @@
     <section id="standings" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Campeonato</h2>
-            <div class="text-center text-gray-700 text-xl p-10 bg-gray-100 rounded-lg shadow-inner">
-                <p>O campeonato ainda não foi iniciado.</p>
+            <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
+                <!-- Competitions List -->
+                <h3 class="text-2xl font-bold text-center mb-8 text-[#002776]">Competições Oficiais</h3>
+                <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition">
+                        <p class="font-semibold text-lg text-[#002776]">CBFD LEAGUE ONE</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition">
+                        <p class="font-semibold text-lg text-[#002776]">COPA CBFD</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition">
+                        <p class="font-semibold text-lg text-[#002776]">LIBERTADORES CBFD</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition">
+                        <p class="font-semibold text-lg text-[#002776]">SUDAMERICANA CBFD</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition">
+                        <p class="font-semibold text-lg text-[#002776]">SUPERCOPA CBFD</p>
+                    </div>
+                    <div class="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition">
+                        <p class="font-semibold text-lg text-[#002776]">RECOPA CBFD</p>
+                    </div>
+                </div>
+
+                <!-- Featured Players -->
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-[#002776]">Jogadores Destaques</h3>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Individual Awards -->
+                        <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
+                            <h4 class="text-xl font-bold text-[#009739] border-b-2 border-gray-200 pb-2">Destaques Individuais</h4>
+                            <div><strong class="text-[#002776]">CBFD LEAGUE ONE:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
+                            <div><strong class="text-[#002776]">COPA CBFD:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
+                            <div><strong class="text-[#002776]">LIBERTADORES CBFD:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
+                            <div><strong class="text-[#002776]">SUDAMERICANA CBFD:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
+                            <div><strong class="text-[#002776]">SUPERCOPA CBFD:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
+                            <div><strong class="text-[#002776]">RECOPA CBFD:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
+                        </div>
+                        <!-- Top Scorers -->
+                        <div class="bg-white p-6 rounded-lg shadow-md">
+                            <h4 class="text-xl font-bold text-[#009739] border-b-2 border-gray-200 pb-2 mb-4">Artilharia Geral</h4>
+                            <ol class="list-decimal list-inside space-y-3">
+                                <li><span class="font-semibold">__________</span> <span class="text-sm font-mono">(Time: __________)</span> - <span class="font-bold">__ Gols</span></li>
+                                <li><span class="font-semibold">__________</span> <span class="text-sm font-mono">(Time: __________)</span> - <span class="font-bold">__ Gols</span></li>
+                                <li><span class="font-semibold">__________</span> <span class="text-sm font-mono">(Time: __________)</span> - <span class="font-bold">__ Gols</span></li>
+                                <li><span class="font-semibold">__________</span> <span class="text-sm font-mono">(Time: __________)</span> - <span class="font-bold">__ Gols</span></li>
+                                <li><span class="font-semibold">__________</span> <span class="text-sm font-mono">(Time: __________)</span> - <span class="font-bold">__ Gols</span></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -226,18 +277,18 @@
                 </div>
                 <div class="bg-white rounded-xl overflow-hidden shadow-md team-card transition duration-300">
                     <div class="h-40 bg-[#002776] flex items-center justify-center">
-                        <div class="w-24 h-24 bg-red-500 rounded-full flex items-center justify-center font-bold text-white text-xl">TIT</div>
+                        <div class="w-24 h-24 bg-red-500 rounded-full flex items-center justify-center font-bold text-white text-xl">CRP</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-center">Titans</h3>
+                        <h3 class="text-xl font-bold mb-2 text-center">CLUBE DE REGATAS DO PORCOS</h3>
                     </div>
                 </div>
                 <div class="bg-white rounded-xl overflow-hidden shadow-md team-card transition duration-300">
                     <div class="h-40 bg-[#002776] flex items-center justify-center">
-                        <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center font-bold text-white text-xl">WAR</div>
+                        <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center font-bold text-white text-xl">FCV</div>
                     </div>
                     <div class="p-6">
-                        <h3 class="text-xl font-bold mb-2 text-center">Warriors</h3>
+                        <h3 class="text-xl font-bold mb-2 text-center">FC VENCEDORES</h3>
                     </div>
                 </div>
             </div>
@@ -311,6 +362,17 @@
         </div>
     </div>
 
+    <!-- Admin Panel -->
+    <div id="admin-panel" class="fixed top-0 right-0 h-full w-full max-w-lg bg-[#002776] text-white shadow-2xl p-6 transform translate-x-full z-50 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h2 class="text-2xl font-bold text-[#FFDF00]">Painel de Administração</h2>
+            <button id="close-admin-panel-btn" class="text-white hover:text-[#FFDF00] text-3xl font-bold">&times;</button>
+        </div>
+        <div id="admin-content" class="space-y-4">
+            <!-- Team list will be dynamically populated here -->
+        </div>
+    </div>
+
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
@@ -327,14 +389,12 @@
             const userSession = document.getElementById('user-session');
             const welcomeMessage = document.getElementById('welcome-message');
             const logoutBtn = document.getElementById('logout-btn');
-            const addBalanceBtn = document.getElementById('add-balance-btn');
 
             // --- Mobile Auth Elements ---
             const loginRegisterBtnMobile = document.getElementById('login-register-btn-mobile');
             const userSessionMobile = document.getElementById('user-session-mobile');
             const welcomeMessageMobile = document.getElementById('welcome-message-mobile');
             const logoutBtnMobile = document.getElementById('logout-btn-mobile');
-            const addBalanceBtnMobile = document.getElementById('add-balance-btn-mobile');
 
             // --- Form Elements ---
             const loginForm = document.getElementById('login-form');
@@ -342,6 +402,11 @@
             const loginError = document.getElementById('login-error');
             const registerError = document.getElementById('register-error');
             const registerSuccess = document.getElementById('register-success');
+
+            // --- Admin Panel Elements ---
+            const adminPanel = document.getElementById('admin-panel');
+            const closeAdminPanelBtn = document.getElementById('close-admin-panel-btn');
+            const adminContent = document.getElementById('admin-content');
 
             // --- Modal Logic ---
             const showModal = () => authModal.style.display = 'flex';
@@ -383,6 +448,7 @@
             // --- LocalStorage User Management ---
             const getUsers = () => JSON.parse(localStorage.getItem('cbfd_users')) || [];
             const saveUsers = (users) => localStorage.setItem('cbfd_users', JSON.stringify(users));
+            const formatCurrency = (value) => new Intl.NumberFormat('pt-BR', { style: 'currency', currency: 'BRL' }).format(value).replace('R$', 'CB$');
 
             // --- Registration Logic ---
             registerForm.addEventListener('submit', (e) => {
@@ -403,10 +469,11 @@
                 }
 
                 const newUser = {
+                    id: `cbfd-${Date.now()}`, // Unique ID for each user
                     username,
                     password, // NOTE: In a real app, ALWAYS hash passwords.
                     type: isTeam ? 'time' : 'jogador',
-                    balance: 0
+                    balance: isTeam ? 20000000 : 0
                 };
                 users.push(newUser);
                 saveUsers(users);
@@ -426,7 +493,6 @@
                 const foundUser = users.find(user => user.username.toLowerCase() === username.toLowerCase() && user.password === password);
                 
                 if (foundUser) {
-                    // Using sessionStorage to keep user logged in for the session
                     sessionStorage.setItem('cbfd_loggedInUser', JSON.stringify(foundUser));
                     updateUIForLoggedInUser();
                     hideModal();
@@ -444,35 +510,12 @@
             logoutBtn.addEventListener('click', handleLogout);
             logoutBtnMobile.addEventListener('click', handleLogout);
 
-
-            // --- Balance Logic ---
-            const handleAddBalance = () => {
-                const loggedInUser = JSON.parse(sessionStorage.getItem('cbfd_loggedInUser'));
-                if (!loggedInUser) return;
-
-                const users = getUsers();
-                const userIndex = users.findIndex(user => user.username === loggedInUser.username);
-                
-                if (userIndex !== -1) {
-                    // Add a fixed test amount
-                    users[userIndex].balance += 100; 
-                    saveUsers(users);
-                    
-                    // Update session storage and UI
-                    sessionStorage.setItem('cbfd_loggedInUser', JSON.stringify(users[userIndex]));
-                    updateUIForLoggedInUser();
-                }
-            };
-            addBalanceBtn.addEventListener('click', handleAddBalance);
-            addBalanceBtnMobile.addEventListener('click', handleAddBalance);
-
-
             // --- UI Update Functions ---
             const updateUIForLoggedInUser = () => {
                 const loggedInUser = JSON.parse(sessionStorage.getItem('cbfd_loggedInUser'));
                 if (loggedInUser) {
-                    const welcomeText = `Bem-vindo, ${loggedInUser.username} (${loggedInUser.type})`;
-                    const balanceText = `Saldo: R$ ${loggedInUser.balance.toFixed(2)}`;
+                    const welcomeText = `Bem-vindo, ${loggedInUser.username}`;
+                    const balanceText = `Saldo: ${formatCurrency(loggedInUser.balance)}`;
                     
                     // Desktop UI
                     welcomeMessage.innerHTML = `${welcomeText} | <span class="text-[#FFDF00]">${balanceText}</span>`;
@@ -495,6 +538,84 @@
                 userSessionMobile.classList.add('hidden');
                 loginRegisterBtnMobile.classList.remove('hidden');
             };
+
+            // --- Admin Panel Logic ---
+            const openAdminPanel = () => {
+                populateAdminPanel();
+                adminPanel.classList.remove('translate-x-full');
+            };
+            const closeAdminPanel = () => adminPanel.classList.add('translate-x-full');
+
+            document.addEventListener('keydown', (e) => {
+                if (e.ctrlKey && e.shiftKey && e.key === 'U') {
+                    e.preventDefault();
+                    if (adminPanel.classList.contains('translate-x-full')) {
+                        openAdminPanel();
+                    } else {
+                        closeAdminPanel();
+                    }
+                }
+            });
+            closeAdminPanelBtn.addEventListener('click', closeAdminPanel);
+
+            const populateAdminPanel = () => {
+                const users = getUsers();
+                const teams = users.filter(user => user.type === 'time');
+                adminContent.innerHTML = ''; // Clear previous content
+
+                if (teams.length === 0) {
+                    adminContent.innerHTML = '<p class="text-gray-400">Nenhum time registrado ainda.</p>';
+                    return;
+                }
+
+                const teamList = document.createElement('div');
+                teamList.className = 'space-y-4';
+                
+                teams.forEach(team => {
+                    const teamCard = document.createElement('div');
+                    teamCard.className = 'bg-[#0038a8] p-4 rounded-lg border border-[#FFDF00]';
+                    
+                    teamCard.innerHTML = `
+                        <h3 class="font-bold text-lg text-white">${team.username}</h3>
+                        <p class="text-gray-300">Saldo: <span class="font-semibold text-[#FFDF00]">${formatCurrency(team.balance)}</span></p>
+                        <div class="mt-3 flex flex-wrap gap-2">
+                            <button data-id="${team.id}" class="admin-action-btn increase-balance bg-green-500 hover:bg-green-600 text-white text-sm font-bold py-1 px-3 rounded">Aumentar Saldo</button>
+                            <button data-id="${team.id}" class="admin-action-btn reset-balance bg-yellow-500 hover:bg-yellow-600 text-black text-sm font-bold py-1 px-3 rounded">Resetar Saldo</button>
+                            <button data-id="${team.id}" class="admin-action-btn remove-team bg-red-600 hover:bg-red-700 text-white text-sm font-bold py-1 px-3 rounded">Remover Time</button>
+                        </div>
+                    `;
+                    teamList.appendChild(teamCard);
+                });
+                adminContent.appendChild(teamList);
+            };
+
+            // Event delegation for admin action buttons
+            adminContent.addEventListener('click', (e) => {
+                if (!e.target.classList.contains('admin-action-btn')) return;
+
+                const teamId = e.target.dataset.id;
+                let users = getUsers();
+                const teamIndex = users.findIndex(user => user.id === teamId);
+                if (teamIndex === -1) return;
+
+                if (e.target.classList.contains('increase-balance')) {
+                    const amount = parseFloat(prompt("Quanto deseja adicionar ao saldo?", "1000000"));
+                    if (!isNaN(amount) && amount > 0) {
+                        users[teamIndex].balance += amount;
+                    }
+                } else if (e.target.classList.contains('reset-balance')) {
+                    if (confirm(`Tem certeza que deseja resetar o saldo de ${users[teamIndex].username} para o valor inicial?`)) {
+                        users[teamIndex].balance = 20000000;
+                    }
+                } else if (e.target.classList.contains('remove-team')) {
+                     if (confirm(`Tem certeza que deseja REMOVER o time ${users[teamIndex].username}? Esta ação não pode ser desfeita.`)) {
+                        users.splice(teamIndex, 1);
+                     }
+                }
+
+                saveUsers(users);
+                populateAdminPanel(); // Refresh the panel view
+            });
             
             // --- Initial Check on Page Load ---
             const checkLoginStatus = () => {
