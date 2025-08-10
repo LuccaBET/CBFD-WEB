@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CBFD - Confederação Brasileira de Futebol Digital</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom CSS for elements that need more specific styling */
+        .hero-gradient {
+            background: linear-gradient(135deg, #009739 0%, #002776 100%);
+        }
+        
+        .news-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .team-card:hover {
+            transform: scale(1.03);
+        }
+        
+        .yellow-border {
+            border-color: #FFDF00;
+        }
+        
+        /* Custom animation for the logo */
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .logo-pulse {
+            animation: pulse 2s infinite;
+        }
+
+        /* Modal styles */
+        .modal-backdrop {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="bg-gray-100 font-sans">
+    <!-- Navigation -->
+    <nav class="bg-[#002776] text-white shadow-lg">
+        <div class="container mx-auto px-4 py-3 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div class="w-10 h-10 bg-[#FFDF00] rounded-full flex items-center justify-center font-bold text-[#002776]">CBFD</div>
+                <span class="font-bold text-xl">Confederação Brasileira de Futebol Digital</span>
+            </div>
+            <button id="mobile-menu-button" class="md:hidden focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
+                </svg>
+            </button>
+            <div class="hidden md:flex items-center space-x-6">
+                <a href="#home" class="hover:text-[#FFDF00] font-medium">Início</a>
+                <a href="#news" class="hover:text-[#FFDF00] font-medium">Notícias</a>
+                <a href="#standings" class="hover:text-[#FFDF00] font-medium">Campeonato</a>
+                <a href="#teams" class="hover:text-[#FFDF00] font-medium">Times</a>
+                <a href="#about" class="hover:text-[#FFDF00] font-medium">Sobre</a>
+                <div id="user-session" class="hidden items-center space-x-4">
+                    <span id="welcome-message" class="font-medium"></span>
+                    <button id="add-balance-btn" class="bg-[#FFDF00] text-[#002776] px-3 py-1 rounded-md text-sm font-bold hover:bg-yellow-400">Adicionar Saldo (teste)</button>
+                    <button id="logout-btn" class="bg-[#009739] text-white px-3 py-1 rounded-md text-sm font-bold hover:bg-green-700">Sair</button>
+                </div>
+                <button id="login-register-btn" class="bg-[#FFDF00] hover:bg-yellow-400 text-[#002776] font-bold py-2 px-4 rounded-full transition duration-300">Login / Cadastro</button>
+            </div>
+        </div>
+        <!-- Mobile menu -->
+        <div id="mobile-menu" class="hidden md:hidden bg-[#002776] px-4 py-2">
+            <a href="#home" class="block py-2 hover:text-[#FFDF00]">Início</a>
+            <a href="#news" class="block py-2 hover:text-[#FFDF00]">Notícias</a>
+            <a href="#standings" class="block py-2 hover:text-[#FFDF00]">Campeonato</a>
+            <a href="#teams" class="block py-2 hover:text-[#FFDF00]">Times</a>
+            <a href="#about" class="block py-2 hover:text-[#FFDF00]">Sobre</a>
+            <!-- Login/Register button for mobile -->
+            <div id="mobile-auth-buttons" class="mt-4">
+                 <button id="login-register-btn-mobile" class="w-full bg-[#FFDF00] hover:bg-yellow-400 text-[#002776] font-bold py-2 px-4 rounded-full transition duration-300">Login / Cadastro</button>
+                 <div id="user-session-mobile" class="hidden text-center mt-2">
+                    <span id="welcome-message-mobile" class="block font-medium mb-2"></span>
+                    <button id="add-balance-btn-mobile" class="w-full mb-2 bg-[#FFDF00] text-[#002776] px-3 py-2 rounded-md text-sm font-bold hover:bg-yellow-400">Adicionar Saldo (teste)</button>
+                    <button id="logout-btn-mobile" class="w-full bg-[#009739] text-white px-3 py-2 rounded-md text-sm font-bold hover:bg-green-700">Sair</button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero-gradient text-white py-16 md:py-24">
+        <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
+            <div class="md:w-1/2 mb-10 md:mb-0 flex flex-col items-center md:items-start">
+                <div class="logo-pulse mb-6">
+                    <div class="w-32 h-32 bg-[#FFDF00] rounded-full flex items-center justify-center font-bold text-[#002776] text-4xl shadow-xl">CBFD</div>
+                </div>
+                <h1 class="text-4xl md:text-5xl font-bold mb-4 text-center md:text-left">Confederação Brasileira de Futebol Digital</h1>
+                <p class="text-xl mb-8 text-center md:text-left">A maior competição de eSports de futebol do Brasil!</p>
+                <a href="#about" class="bg-[#FFDF00] hover:bg-yellow-400 text-[#002776] font-bold py-3 px-8 rounded-full transition duration-300 transform hover:scale-105">Saiba Mais</a>
+            </div>
+            <div class="md:w-1/2">
+                <div class="bg-blue-900 bg-opacity-50 rounded-xl p-6 border-2 yellow-border">
+                    <h2 class="text-2xl font-bold mb-4 text-[#FFDF00]">Últimas Notícias</h2>
+                    <div class="space-y-4">
+                        <div class="p-4 bg-blue-800 bg-opacity-75 rounded-lg hover:bg-opacity-100 transition duration-300">
+                            <h3 class="font-bold text-lg">Final da Temporada 2025 definida</h3>
+                            <p class="text-sm">Os times Dragons e Phoenix se enfrentarão na grande final no próximo sábado.</p>
+                            <a href="#news" class="text-[#FFDF00] text-sm font-medium hover:underline">Ler mais</a>
+                        </div>
+                        <div class="p-4 bg-blue-800 bg-opacity-75 rounded-lg hover:bg-opacity-100 transition duration-300">
+                            <h3 class="font-bold text-lg">Novo sistema de torneios anunciado</h3>
+                            <p class="text-sm">CBFD revela formato inovador para a próxima temporada com mais premiações.</p>
+                            <a href="#news" class="text-[#FFDF00] text-sm font-medium hover:underline">Ler mais</a>
+                        </div>
+                        <div class="p-4 bg-blue-800 bg-opacity-75 rounded-lg hover:bg-opacity-100 transition duration-300">
+                            <h3 class="font-bold text-lg">Recorde de audiência na semifinal</h3>
+                            <p class="text-sm">Mais de 50 mil espectadores acompanharam a emocionante partida entre Titans e Warriors.</p>
+                            <a href="#news" class="text-[#FFDF00] text-sm font-medium hover:underline">Ler mais</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Sobre a CBFD</h2>
+            <div class="flex flex-col md:flex-row items-center">
+                <div class="md:w-1/2 mb-8 md:mb-0 md:pr-8">
+                    <img src="https://placehold.co/600x400/009739/FFFFFF?text=Hist%C3%B3ria+da+CBFD" alt="História da CBFD" class="rounded-lg shadow-xl w-full">
+                </div>
+                <div class="md:w-1/2">
+                    <h3 class="text-2xl font-bold mb-4 text-[#002776]">Nossa História</h3>
+                    <p class="mb-4 text-gray-700">Fundada em 2018, a CBFD surgiu da paixão por futebol e eSports. Começamos como um pequeno torneio entre amigos e hoje somos a principal liga de futebol digital do Brasil, com transmissões ao vivo e milhares de fãs.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-[#002776]">Nossa Missão</h3>
+                    <p class="mb-4 text-gray-700">Promover a profissionalização do futebol digital no Brasil, oferecendo competições de alto nível, desenvolvendo novos talentos e proporcionando entretenimento de qualidade para nossos fãs.</p>
+                    <h3 class="text-2xl font-bold mb-4 text-[#002776]">Nossos Valores</h3>
+                    <ul class="list-disc pl-5 text-gray-700 space-y-2">
+                        <li>Fair Play acima de tudo</li>
+                        <li>Inovação constante</li>
+                        <li>Comunidade engajada</li>
+                        <li>Profissionalismo e ética</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section id="news" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Últimas Notícias</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News Card 1 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md news-card transition duration-300">
+                    <img src="https://placehold.co/600x400/009739/FFFFFF?text=Final+2025" alt="Final da Temporada" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-[#009739]">Competições</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Final da Temporada 2025 definida</h3>
+                        <p class="text-gray-600 mb-4">Os times Dragons e Phoenix se enfrentarão na grande final no próximo sábado, com transmissão ao vivo em nosso canal oficial.</p>
+                        <a href="#" class="text-[#002776] font-medium hover:underline">Ler mais →</a>
+                    </div>
+                </div>
+                
+                <!-- News Card 2 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md news-card transition duration-300">
+                    <img src="https://placehold.co/600x400/009739/FFFFFF?text=Novo+Sistema" alt="Novo Sistema" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-[#009739]">Anúncios</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Novo sistema de torneios anunciado</h3>
+                        <p class="text-gray-600 mb-4">A CBFD revelou um formato inovador para a próxima temporada, com mais etapas classificatórias e premiação recorde.</p>
+                        <a href="#" class="text-[#002776] font-medium hover:underline">Ler mais →</a>
+                    </div>
+                </div>
+                
+                <!-- News Card 3 -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md news-card transition duration-300">
+                    <img src="https://placehold.co/600x400/009739/FFFFFF?text=Audi%C3%AAncia" alt="Recorde de Audiência" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span class="text-sm text-[#009739]">Mídia</span>
+                        <h3 class="text-xl font-bold mt-2 mb-3">Recorde de audiência na semifinal</h3>
+                        <p class="text-gray-600 mb-4">A partida entre Titans e Warriors bateu recorde com mais de 50 mil espectadores simultâneos em nossas plataformas.</p>
+                        <a href="#" class="text-[#002776] font-medium hover:underline">Ler mais →</a>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center mt-10">
+                <a href="#" class="bg-[#002776] hover:bg-blue-900 text-white font-bold py-3 px-8 rounded-full transition duration-300 inline-block">Ver Todas as Notícias</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Standings Section -->
+    <section id="standings" class="py-16 bg-white">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Campeonato</h2>
+            <div class="text-center text-gray-700 text-xl p-10 bg-gray-100 rounded-lg shadow-inner">
+                <p>O campeonato ainda não foi iniciado.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Teams Section -->
+    <section id="teams" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Nossos Times</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+                <!-- Team Cards -->
+                <div class="bg-white rounded-xl overflow-hidden shadow-md team-card transition duration-300">
+                    <div class="h-40 bg-[#002776] flex items-center justify-center">
+                        <div class="w-24 h-24 bg-[#FFDF00] rounded-full flex items-center justify-center font-bold text-[#002776] text-xl">PHX</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-center">Phoenix</h3>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md team-card transition duration-300">
+                    <div class="h-40 bg-[#002776] flex items-center justify-center">
+                        <div class="w-24 h-24 bg-blue-500 rounded-full flex items-center justify-center font-bold text-white text-xl">DRG</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-center">Dragons</h3>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md team-card transition duration-300">
+                    <div class="h-40 bg-[#002776] flex items-center justify-center">
+                        <div class="w-24 h-24 bg-red-500 rounded-full flex items-center justify-center font-bold text-white text-xl">TIT</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-center">Titans</h3>
+                    </div>
+                </div>
+                <div class="bg-white rounded-xl overflow-hidden shadow-md team-card transition duration-300">
+                    <div class="h-40 bg-[#002776] flex items-center justify-center">
+                        <div class="w-24 h-24 bg-green-500 rounded-full flex items-center justify-center font-bold text-white text-xl">WAR</div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-xl font-bold mb-2 text-center">Warriors</h3>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-[#002776] text-white py-8">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col md:flex-row justify-between items-center">
+                <div class="mb-6 md:mb-0">
+                    <div class="flex items-center space-x-2">
+                        <div class="w-10 h-10 bg-[#FFDF00] rounded-full flex items-center justify-center font-bold text-[#002776]">CBFD</div>
+                        <span class="font-bold text-xl">Confederação Brasileira de Futebol Digital</span>
+                    </div>
+                    <p class="mt-2 text-sm">© 2025 CBFD. Todos os direitos reservados.</p>
+                </div>
+                <div class="flex space-x-6">
+                     <!-- Social media icons can be added here if needed -->
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Login/Register Modal -->
+    <div id="auth-modal" class="fixed inset-0 z-50 items-center justify-center hidden modal-backdrop">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8 m-4">
+            <div class="flex justify-between items-center mb-6">
+                <h2 id="modal-title" class="text-2xl font-bold text-[#002776]">Login</h2>
+                <button id="close-modal-btn" class="text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
+            </div>
+            
+            <!-- Login Form -->
+            <form id="login-form" class="">
+                <div class="mb-4">
+                    <label for="login-username" class="block text-sm font-medium text-gray-700 mb-1">Nome de Usuário</label>
+                    <input type="text" id="login-username" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#009739]" required>
+                </div>
+                <div class="mb-6">
+                    <label for="login-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                    <input type="password" id="login-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#009739]" required>
+                </div>
+                <button type="submit" class="w-full bg-[#009739] hover:bg-green-700 text-white font-bold py-3 rounded-md transition duration-300">Entrar</button>
+                <p id="login-error" class="mt-2 text-sm text-red-600 text-center hidden">Usuário ou senha inválidos.</p>
+            </form>
+
+            <!-- Register Form -->
+            <form id="register-form" class="hidden">
+                <div class="mb-4">
+                    <label for="register-username" class="block text-sm font-medium text-gray-700 mb-1">Nome de Usuário</label>
+                    <input type="text" id="register-username" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#009739]" required>
+                </div>
+                <div class="mb-4">
+                    <label for="register-password" class="block text-sm font-medium text-gray-700 mb-1">Senha</label>
+                    <input type="password" id="register-password" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#009739]" required>
+                </div>
+                <div class="mb-6">
+                    <label class="flex items-center">
+                        <input type="checkbox" id="register-is-team" class="form-checkbox h-5 w-5 text-[#009739] rounded focus:ring-[#009739]">
+                        <span class="ml-2 text-gray-700">Sou um time</span>
+                    </label>
+                </div>
+                <button type="submit" class="w-full bg-[#009739] hover:bg-green-700 text-white font-bold py-3 rounded-md transition duration-300">Cadastrar</button>
+                <p id="register-error" class="mt-2 text-sm text-red-600 text-center hidden">Usuário já existe.</p>
+                 <p id="register-success" class="mt-2 text-sm text-green-600 text-center hidden">Cadastro realizado com sucesso! Faça o login.</p>
+            </form>
+
+            <div class="text-center mt-4">
+                <a href="#" id="toggle-form-link" class="text-sm text-[#002776] hover:underline">Não tem uma conta? Cadastre-se</a>
+            </div>
+        </div>
+    </div>
+
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // --- General UI Elements ---
+            const authModal = document.getElementById('auth-modal');
+            const closeModalBtn = document.getElementById('close-modal-btn');
+            const toggleFormLink = document.getElementById('toggle-form-link');
+            const modalTitle = document.getElementById('modal-title');
+            const mobileMenuButton = document.getElementById('mobile-menu-button');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            // --- Desktop Auth Elements ---
+            const loginRegisterBtn = document.getElementById('login-register-btn');
+            const userSession = document.getElementById('user-session');
+            const welcomeMessage = document.getElementById('welcome-message');
+            const logoutBtn = document.getElementById('logout-btn');
+            const addBalanceBtn = document.getElementById('add-balance-btn');
+
+            // --- Mobile Auth Elements ---
+            const loginRegisterBtnMobile = document.getElementById('login-register-btn-mobile');
+            const userSessionMobile = document.getElementById('user-session-mobile');
+            const welcomeMessageMobile = document.getElementById('welcome-message-mobile');
+            const logoutBtnMobile = document.getElementById('logout-btn-mobile');
+            const addBalanceBtnMobile = document.getElementById('add-balance-btn-mobile');
+
+            // --- Form Elements ---
+            const loginForm = document.getElementById('login-form');
+            const registerForm = document.getElementById('register-form');
+            const loginError = document.getElementById('login-error');
+            const registerError = document.getElementById('register-error');
+            const registerSuccess = document.getElementById('register-success');
+
+            // --- Modal Logic ---
+            const showModal = () => authModal.style.display = 'flex';
+            const hideModal = () => authModal.style.display = 'none';
+            loginRegisterBtn.addEventListener('click', showModal);
+            loginRegisterBtnMobile.addEventListener('click', showModal);
+            closeModalBtn.addEventListener('click', hideModal);
+            window.addEventListener('click', (event) => {
+                if (event.target === authModal) {
+                    hideModal();
+                }
+            });
+
+            // --- Mobile Menu Toggle ---
+            mobileMenuButton.addEventListener('click', () => {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // --- Form Toggle Logic ---
+            toggleFormLink.addEventListener('click', (e) => {
+                e.preventDefault();
+                loginError.classList.add('hidden');
+                registerError.classList.add('hidden');
+                registerSuccess.classList.add('hidden');
+
+                if (loginForm.classList.contains('hidden')) {
+                    loginForm.classList.remove('hidden');
+                    registerForm.classList.add('hidden');
+                    modalTitle.textContent = 'Login';
+                    toggleFormLink.textContent = 'Não tem uma conta? Cadastre-se';
+                } else {
+                    loginForm.classList.add('hidden');
+                    registerForm.classList.remove('hidden');
+                    modalTitle.textContent = 'Cadastro';
+                    toggleFormLink.textContent = 'Já tem uma conta? Faça o login';
+                }
+            });
+            
+            // --- LocalStorage User Management ---
+            const getUsers = () => JSON.parse(localStorage.getItem('cbfd_users')) || [];
+            const saveUsers = (users) => localStorage.setItem('cbfd_users', JSON.stringify(users));
+
+            // --- Registration Logic ---
+            registerForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('register-username').value.trim();
+                const password = document.getElementById('register-password').value;
+                const isTeam = document.getElementById('register-is-team').checked;
+
+                if (!username || !password) return;
+
+                const users = getUsers();
+                const userExists = users.some(user => user.username.toLowerCase() === username.toLowerCase());
+
+                if (userExists) {
+                    registerError.classList.remove('hidden');
+                    registerSuccess.classList.add('hidden');
+                    return;
+                }
+
+                const newUser = {
+                    username,
+                    password, // NOTE: In a real app, ALWAYS hash passwords.
+                    type: isTeam ? 'time' : 'jogador',
+                    balance: 0
+                };
+                users.push(newUser);
+                saveUsers(users);
+                
+                registerForm.reset();
+                registerError.classList.add('hidden');
+                registerSuccess.classList.remove('hidden');
+            });
+
+            // --- Login Logic ---
+            loginForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const username = document.getElementById('login-username').value.trim();
+                const password = document.getElementById('login-password').value;
+
+                const users = getUsers();
+                const foundUser = users.find(user => user.username.toLowerCase() === username.toLowerCase() && user.password === password);
+                
+                if (foundUser) {
+                    // Using sessionStorage to keep user logged in for the session
+                    sessionStorage.setItem('cbfd_loggedInUser', JSON.stringify(foundUser));
+                    updateUIForLoggedInUser();
+                    hideModal();
+                    loginForm.reset();
+                } else {
+                    loginError.classList.remove('hidden');
+                }
+            });
+
+            // --- Logout Logic ---
+            const handleLogout = () => {
+                sessionStorage.removeItem('cbfd_loggedInUser');
+                updateUIForLoggedOutUser();
+            };
+            logoutBtn.addEventListener('click', handleLogout);
+            logoutBtnMobile.addEventListener('click', handleLogout);
+
+
+            // --- Balance Logic ---
+            const handleAddBalance = () => {
+                const loggedInUser = JSON.parse(sessionStorage.getItem('cbfd_loggedInUser'));
+                if (!loggedInUser) return;
+
+                const users = getUsers();
+                const userIndex = users.findIndex(user => user.username === loggedInUser.username);
+                
+                if (userIndex !== -1) {
+                    // Add a fixed test amount
+                    users[userIndex].balance += 100; 
+                    saveUsers(users);
+                    
+                    // Update session storage and UI
+                    sessionStorage.setItem('cbfd_loggedInUser', JSON.stringify(users[userIndex]));
+                    updateUIForLoggedInUser();
+                }
+            };
+            addBalanceBtn.addEventListener('click', handleAddBalance);
+            addBalanceBtnMobile.addEventListener('click', handleAddBalance);
+
+
+            // --- UI Update Functions ---
+            const updateUIForLoggedInUser = () => {
+                const loggedInUser = JSON.parse(sessionStorage.getItem('cbfd_loggedInUser'));
+                if (loggedInUser) {
+                    const welcomeText = `Bem-vindo, ${loggedInUser.username} (${loggedInUser.type})`;
+                    const balanceText = `Saldo: R$ ${loggedInUser.balance.toFixed(2)}`;
+                    
+                    // Desktop UI
+                    welcomeMessage.innerHTML = `${welcomeText} | <span class="text-[#FFDF00]">${balanceText}</span>`;
+                    userSession.classList.remove('hidden');
+                    loginRegisterBtn.classList.add('hidden');
+                    
+                    // Mobile UI
+                    welcomeMessageMobile.innerHTML = `${welcomeText}<br><span class="text-[#FFDF00]">${balanceText}</span>`;
+                    userSessionMobile.classList.remove('hidden');
+                    loginRegisterBtnMobile.classList.add('hidden');
+                }
+            };
+            
+            const updateUIForLoggedOutUser = () => {
+                // Desktop UI
+                userSession.classList.add('hidden');
+                loginRegisterBtn.classList.remove('hidden');
+                
+                // Mobile UI
+                userSessionMobile.classList.add('hidden');
+                loginRegisterBtnMobile.classList.remove('hidden');
+            };
+            
+            // --- Initial Check on Page Load ---
+            const checkLoginStatus = () => {
+                const loggedInUser = sessionStorage.getItem('cbfd_loggedInUser');
+                if (loggedInUser) {
+                    updateUIForLoggedInUser();
+                } else {
+                    updateUIForLoggedOutUser();
+                }
+            };
+
+            checkLoginStatus();
+        });
+    </script>
+</body>
+</html>
