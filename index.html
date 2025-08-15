@@ -43,11 +43,39 @@
         #admin-panel {
             transition: transform 0.3s ease-in-out;
         }
+
+        /* Accordion styles */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out;
+        }
+
+        /* Calendar styles */
+        .calendar-day {
+            border: 1px solid #e2e8f0;
+        }
+        .deadline {
+            background-color: #fefcbf; /* yellow-100 */
+            color: #b45309; /* amber-700 */
+            font-weight: bold;
+            position: relative;
+        }
+        .deadline::after {
+            content: 'Prazo!';
+            position: absolute;
+            bottom: 2px;
+            right: 2px;
+            font-size: 0.65rem;
+            padding: 1px 3px;
+            background-color: #f59e0b; /* amber-500 */
+            color: white;
+            border-radius: 3px;
+        }
     </style>
 </head>
 <body class="bg-gray-100 font-sans">
-    <!-- Navigation -->
-    <nav class="bg-[#002776] text-white shadow-lg">
+    <nav class="bg-[#002776] text-white shadow-lg sticky top-0 z-40">
         <div class="container mx-auto px-4 py-3 flex justify-between items-center">
             <div class="flex items-center space-x-2">
                 <div class="w-10 h-10 bg-[#FFDF00] rounded-full flex items-center justify-center font-bold text-[#002776]">CBFD</div>
@@ -62,6 +90,7 @@
                 <a href="#home" class="hover:text-[#FFDF00] font-medium">Início</a>
                 <a href="#news" class="hover:text-[#FFDF00] font-medium">Notícias</a>
                 <a href="#standings" class="hover:text-[#FFDF00] font-medium">Campeonato</a>
+                <a href="#regulations" class="hover:text-[#FFDF00] font-medium">Regulamento</a>
                 <a href="#teams" class="hover:text-[#FFDF00] font-medium">Times</a>
                 <a href="#about" class="hover:text-[#FFDF00] font-medium">Sobre</a>
                 <div id="user-session" class="hidden items-center space-x-4">
@@ -71,14 +100,13 @@
                 <button id="login-register-btn" class="bg-[#FFDF00] hover:bg-yellow-400 text-[#002776] font-bold py-2 px-4 rounded-full transition duration-300">Login / Cadastro</button>
             </div>
         </div>
-        <!-- Mobile menu -->
         <div id="mobile-menu" class="hidden md:hidden bg-[#002776] px-4 py-2">
             <a href="#home" class="block py-2 hover:text-[#FFDF00]">Início</a>
             <a href="#news" class="block py-2 hover:text-[#FFDF00]">Notícias</a>
             <a href="#standings" class="block py-2 hover:text-[#FFDF00]">Campeonato</a>
+            <a href="#regulations" class="block py-2 hover:text-[#FFDF00]">Regulamento</a>
             <a href="#teams" class="block py-2 hover:text-[#FFDF00]">Times</a>
             <a href="#about" class="block py-2 hover:text-[#FFDF00]">Sobre</a>
-            <!-- Login/Register button for mobile -->
             <div id="mobile-auth-buttons" class="mt-4">
                  <button id="login-register-btn-mobile" class="w-full bg-[#FFDF00] hover:bg-yellow-400 text-[#002776] font-bold py-2 px-4 rounded-full transition duration-300">Login / Cadastro</button>
                  <div id="user-session-mobile" class="hidden text-center mt-2">
@@ -89,7 +117,6 @@
         </div>
     </nav>
 
-    <!-- Hero Section -->
     <section id="home" class="hero-gradient text-white py-16 md:py-24">
         <div class="container mx-auto px-4 flex flex-col md:flex-row items-center">
             <div class="md:w-1/2 mb-10 md:mb-0 flex flex-col items-center md:items-start">
@@ -124,8 +151,69 @@
             </div>
         </div>
     </section>
+    
+    <section id="team-panel" class="hidden py-16 bg-blue-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Painel do Time</h2>
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-[#002776] mb-6">Calendário e Envio de Escalações</h3>
+                    <div class="mb-8">
+                        <h4 class="text-lg font-semibold mb-2 text-gray-800">Agosto 2025</h4>
+                        <div class="grid grid-cols-7 text-center text-sm text-gray-500 mb-2">
+                            <div>Dom</div><div>Seg</div><div>Ter</div><div>Qua</div><div>Qui</div><div>Sex</div><div>Sáb</div>
+                        </div>
+                        <div class="grid grid-cols-7 text-center">
+                            <div class="calendar-day p-2 text-gray-400">27</div><div class="calendar-day p-2 text-gray-400">28</div><div class="calendar-day p-2 text-gray-400">29</div><div class="calendar-day p-2 text-gray-400">30</div><div class="calendar-day p-2 text-gray-400">31</div>
+                            <div class="calendar-day p-2">1</div><div class="calendar-day p-2">2</div><div class="calendar-day p-2">3</div><div class="calendar-day p-2">4</div>
+                            <div class="calendar-day p-2">5</div><div class="calendar-day p-2">6</div><div class="calendar-day p-2">7</div><div class="calendar-day p-2">8</div>
+                            <div class="calendar-day p-2">9</div><div class="calendar-day p-2">10</div><div class="calendar-day p-2">11</div><div class="calendar-day p-2">12</div>
+                            <div class="calendar-day p-2">13</div><div class="calendar-day p-2 deadline">14</div><div class="calendar-day p-2">15</div><div class="calendar-day p-2">16</div>
+                            <div class="calendar-day p-2">17</div><div class="calendar-day p-2">18</div><div class="calendar-day p-2">19</div><div class="calendar-day p-2">20</div>
+                            <div class="calendar-day p-2">21</div><div class="calendar-day p-2">22</div><div class="calendar-day p-2">23</div><div class="calendar-day p-2">24</div>
+                            <div class="calendar-day p-2">25</div><div class="calendar-day p-2">26</div><div class="calendar-day p-2">27</div><div class="calendar-day p-2">28</div>
+                            <div class="calendar-day p-2">29</div><div class="calendar-day p-2">30</div><div class="calendar-day p-2">31</div>
+                        </div>
+                    </div>
+                    <form id="lineup-form">
+                        <div class="mb-4">
+                            <label for="match-date" class="block text-sm font-medium text-gray-700 mb-1">Selecione a Partida</label>
+                            <select id="match-date" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#009739]">
+                                <option>Rodada 25 - 16/08/2025 vs Dragons</option>
+                                <option>Rodada 26 - 23/08/2025 vs Phoenix</option>
+                            </select>
+                        </div>
+                        <div class="mb-6">
+                            <label for="lineup-details" class="block text-sm font-medium text-gray-700 mb-1">Escalação (Titulares ou Pontos de Força)</label>
+                            <textarea id="lineup-details" rows="4" class="w-full px-4 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-[#009739]" placeholder="Ex: Goleiro Força 10, Zagueiro Força 9..."></textarea>
+                        </div>
+                        <button type="submit" class="w-full bg-[#009739] hover:bg-green-700 text-white font-bold py-3 rounded-md transition duration-300">Enviar Escalação</button>
+                    </form>
+                </div>
+                <div class="bg-white p-8 rounded-xl shadow-lg">
+                    <h3 class="text-2xl font-bold text-[#002776] mb-6">Canal de Comunicação Oficial</h3>
+                    <div class="space-y-6 h-[450px] overflow-y-auto pr-2">
+                        <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <p class="text-sm text-gray-500 mb-1">14 de Agosto de 2025</p>
+                            <h4 class="font-bold text-[#002776]">Aviso de Manutenção</h4>
+                            <p class="text-gray-700 mt-2">Informamos que o sistema de envio de escalações estará em manutenção na próxima segunda-feira, das 08h às 09h. Agradecemos a compreensão.</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <p class="text-sm text-gray-500 mb-1">12 de Agosto de 2025</p>
+                            <h4 class="font-bold text-[#002776]">Alteração no Calendário da Copa CBFD</h4>
+                            <p class="text-gray-700 mt-2">A partida entre FC Vencedores e Dragons pela Copa CBFD foi remarcada para o dia 30/08. Por favor, confirmem o recebimento desta mensagem.</p>
+                        </div>
+                        <div class="p-4 bg-gray-50 rounded-lg border border-gray-200">
+                            <p class="text-sm text-gray-500 mb-1">10 de Agosto de 2025</p>
+                            <h4 class="font-bold text-[#002776]">Confirmação de Inscrição na Temporada 2026</h4>
+                            <p class="text-gray-700 mt-2">Lembramos a todos os times que o prazo para confirmação da inscrição na próxima temporada se encerra em 20/09/2025. Acessem o painel para garantir sua vaga.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 
-    <!-- About Section -->
     <section id="about" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Sobre a CBFD</h2>
@@ -150,12 +238,10 @@
         </div>
     </section>
 
-    <!-- News Section -->
     <section id="news" class="py-16 bg-gray-100">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Últimas Notícias</h2>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- News Card 1 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-md news-card transition duration-300">
                     <img src="https://placehold.co/600x400/009739/FFFFFF?text=Final+2025" alt="Final da Temporada" class="w-full h-48 object-cover">
                     <div class="p-6">
@@ -166,7 +252,6 @@
                     </div>
                 </div>
                 
-                <!-- News Card 2 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-md news-card transition duration-300">
                     <img src="https://placehold.co/600x400/009739/FFFFFF?text=Novo+Sistema" alt="Novo Sistema" class="w-full h-48 object-cover">
                     <div class="p-6">
@@ -177,7 +262,6 @@
                     </div>
                 </div>
                 
-                <!-- News Card 3 -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-md news-card transition duration-300">
                     <img src="https://placehold.co/600x400/009739/FFFFFF?text=Audi%C3%AAncia" alt="Recorde de Audiência" class="w-full h-48 object-cover">
                     <div class="p-6">
@@ -194,12 +278,10 @@
         </div>
     </section>
 
-    <!-- Standings Section -->
     <section id="standings" class="py-16 bg-white">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Campeonato</h2>
             <div class="bg-gray-50 p-6 rounded-lg shadow-inner">
-                <!-- Competitions List -->
                 <h3 class="text-2xl font-bold text-center mb-8 text-[#002776]">Competições Oficiais</h3>
                 <div class="grid grid-cols-2 md:grid-cols-3 gap-4 text-center">
                     <div class="bg-white p-4 rounded-lg shadow-md hover:bg-gray-100 transition">
@@ -222,11 +304,9 @@
                     </div>
                 </div>
 
-                <!-- Featured Players -->
                 <div class="mt-12">
                     <h3 class="text-2xl font-bold text-center mb-8 text-[#002776]">Jogadores Destaques</h3>
                     <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Individual Awards -->
                         <div class="bg-white p-6 rounded-lg shadow-md space-y-4">
                             <h4 class="text-xl font-bold text-[#009739] border-b-2 border-gray-200 pb-2">Destaques Individuais</h4>
                             <div><strong class="text-[#002776]">CBFD LEAGUE ONE:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
@@ -236,7 +316,6 @@
                             <div><strong class="text-[#002776]">SUPERCOPA CBFD:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
                             <div><strong class="text-[#002776]">RECOPA CBFD:</strong> <span class="font-mono">__________ (Time: __________)</span></div>
                         </div>
-                        <!-- Top Scorers -->
                         <div class="bg-white p-6 rounded-lg shadow-md">
                             <h4 class="text-xl font-bold text-[#009739] border-b-2 border-gray-200 pb-2 mb-4">Artilharia Geral</h4>
                             <ol class="list-decimal list-inside space-y-3">
@@ -249,16 +328,110 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="mt-12">
+                    <h3 class="text-2xl font-bold text-center mb-8 text-[#002776]">Histórico de Penalidades</h3>
+                    <div class="bg-white rounded-lg shadow-md overflow-hidden">
+                        <table class="w-full text-left">
+                            <thead class="bg-gray-200">
+                                <tr>
+                                    <th class="p-4 font-semibold text-sm text-gray-700 uppercase">Data</th>
+                                    <th class="p-4 font-semibold text-sm text-gray-700 uppercase">Envolvido</th>
+                                    <th class="p-4 font-semibold text-sm text-gray-700 uppercase">Tipo</th>
+                                    <th class="p-4 font-semibold text-sm text-gray-700 uppercase">Detalhes</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr>
+                                    <td class="p-4 text-sm text-gray-600">05/08/2025</td>
+                                    <td class="p-4 font-medium text-gray-800">Dragons</td>
+                                    <td class="p-4"><span class="text-xs font-bold uppercase py-1 px-2 rounded-full text-yellow-800 bg-yellow-200">Multa</span></td>
+                                    <td class="p-4 text-sm text-gray-600">Atraso no envio da escalação. Multa de CB$ 100.000.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 text-sm text-gray-600">28/07/2025</td>
+                                    <td class="p-4 font-medium text-gray-800">Jogador "Ghost" (Phoenix)</td>
+                                    <td class="p-4"><span class="text-xs font-bold uppercase py-1 px-2 rounded-full text-red-800 bg-red-200">Ban</td>
+                                    <td class="p-4 text-sm text-gray-600">Conduta antidesportiva. Suspensão de 2 jogos.</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-4 text-sm text-gray-600">15/07/2025</td>
+                                    <td class="p-4 font-medium text-gray-800">FC Vencedores</td>
+                                    <td class="p-4"><span class="text-xs font-bold uppercase py-1 px-2 rounded-full text-blue-800 bg-blue-200">Redução de Força</span></td>
+                                    <td class="p-4 text-sm text-gray-600">Uso irregular de tática. Redução de 2 pontos de força na próxima partida.</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
 
-    <!-- Teams Section -->
+    <section id="regulations" class="py-16 bg-gray-100">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Regulamento Oficial</h2>
+            <div class="max-w-4xl mx-auto space-y-4">
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="accordion-header w-full flex justify-between items-center text-left p-6">
+                        <h3 class="text-xl font-bold text-[#002776]">Clubes</h3>
+                        <span class="text-2xl font-bold text-[#009739] transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-gray-700">
+                            <p><strong>Art. 1:</strong> Todos os clubes devem estar devidamente registrados na plataforma da CBFD.</p>
+                            <p><strong>Art. 2:</strong> Cada clube possui um saldo inicial para a temporada, utilizado para salários e transferências.</p>
+                            <p><strong>Art. 3:</strong> É responsabilidade do clube manter suas informações de contato e elenco atualizadas.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="accordion-header w-full flex justify-between items-center text-left p-6">
+                        <h3 class="text-xl font-bold text-[#002776]">Jogadores</h3>
+                        <span class="text-2xl font-bold text-[#009739] transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-gray-700">
+                            <p><strong>Art. 4:</strong> Todos os jogadores devem ter um contrato válido com um clube da liga para participar das competições.</p>
+                            <p><strong>Art. 5:</strong> É vedada a participação de um mesmo jogador por mais de um clube na mesma temporada.</p>
+                            <p><strong>Art. 6:</strong> O fair play é obrigatório. Atitudes antidesportivas serão punidas com rigor.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="accordion-header w-full flex justify-between items-center text-left p-6">
+                        <h3 class="text-xl font-bold text-[#002776]">Penalidades</h3>
+                        <span class="text-2xl font-bold text-[#009739] transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-gray-700">
+                            <p><strong>Art. 7:</strong> As penalidades podem incluir multas (em CB$), suspensão de jogadores ou clubes, e redução de pontos de força.</p>
+                            <p><strong>Art. 8:</strong> Atrasos no envio de escalações resultarão em multa automática.</p>
+                            <p><strong>Art. 9:</strong> Casos graves de conduta antidesportiva podem levar à exclusão da liga.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="bg-white rounded-lg shadow-md">
+                    <button class="accordion-header w-full flex justify-between items-center text-left p-6">
+                        <h3 class="text-xl font-bold text-[#002776]">Comunicações</h3>
+                        <span class="text-2xl font-bold text-[#009739] transform transition-transform duration-300">+</span>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-gray-700">
+                            <p><strong>Art. 10:</strong> A comunicação oficial da CBFD com os clubes será feita através do Canal de Comunicação no painel do time.</p>
+                            <p><strong>Art. 11:</strong> É dever dos representantes dos clubes checar o canal de comunicação diariamente.</p>
+                            <p><strong>Art. 12:</strong> Solicitações e recursos devem ser enviados para o e-mail oficial da administração.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <section id="teams" class="py-16 bg-gray-100">
         <div class="container mx-auto px-4">
             <h2 class="text-3xl font-bold text-center mb-12 text-[#002776]">Nossos Times</h2>
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
-                <!-- Team Cards -->
                 <div class="bg-white rounded-xl overflow-hidden shadow-md team-card transition duration-300">
                     <div class="h-40 bg-[#002776] flex items-center justify-center">
                         <div class="w-24 h-24 bg-[#FFDF00] rounded-full flex items-center justify-center font-bold text-[#002776] text-xl">PHX</div>
@@ -295,7 +468,6 @@
         </div>
     </section>
 
-    <!-- Footer -->
     <footer class="bg-[#002776] text-white py-8">
         <div class="container mx-auto px-4">
             <div class="flex flex-col md:flex-row justify-between items-center">
@@ -307,13 +479,11 @@
                     <p class="mt-2 text-sm">© 2025 CBFD. Todos os direitos reservados.</p>
                 </div>
                 <div class="flex space-x-6">
-                     <!-- Social media icons can be added here if needed -->
-                </div>
+                     </div>
             </div>
         </div>
     </footer>
 
-    <!-- Login/Register Modal -->
     <div id="auth-modal" class="fixed inset-0 z-50 items-center justify-center hidden modal-backdrop">
         <div class="bg-white rounded-lg shadow-xl w-full max-w-md p-8 m-4">
             <div class="flex justify-between items-center mb-6">
@@ -321,7 +491,6 @@
                 <button id="close-modal-btn" class="text-gray-500 hover:text-gray-800 text-3xl font-bold">&times;</button>
             </div>
             
-            <!-- Login Form -->
             <form id="login-form" class="">
                 <div class="mb-4">
                     <label for="login-username" class="block text-sm font-medium text-gray-700 mb-1">Nome de Usuário</label>
@@ -335,7 +504,6 @@
                 <p id="login-error" class="mt-2 text-sm text-red-600 text-center hidden">Usuário ou senha inválidos.</p>
             </form>
 
-            <!-- Register Form -->
             <form id="register-form" class="hidden">
                 <div class="mb-4">
                     <label for="register-username" class="block text-sm font-medium text-gray-700 mb-1">Nome de Usuário</label>
@@ -361,16 +529,29 @@
             </div>
         </div>
     </div>
+    
+    <div id="regulation-modal" class="fixed inset-0 z-50 items-center justify-center hidden modal-backdrop">
+        <div class="bg-white rounded-lg shadow-xl w-full max-w-lg p-8 m-4">
+            <h2 class="text-2xl font-bold text-[#002776] mb-4">Confirmação de Leitura do Regulamento</h2>
+            <p class="text-gray-700 mb-6">Para continuar, você deve ler e concordar com o <a href="#regulations" id="regulation-link" class="text-[#002776] font-bold hover:underline">Regulamento Oficial</a> atualizado da temporada.</p>
+            <div class="mb-6">
+                <label class="flex items-center">
+                    <input type="checkbox" id="regulation-checkbox" class="form-checkbox h-5 w-5 text-[#009739] rounded focus:ring-offset-0 focus:ring-2 focus:ring-[#009739]">
+                    <span class="ml-3 text-gray-800 font-medium">Li e concordo com o Regulamento Oficial.</span>
+                </label>
+            </div>
+            <button id="confirm-regulation-btn" class="w-full bg-gray-400 text-white font-bold py-3 rounded-md transition duration-300 cursor-not-allowed" disabled>Confirmar e Continuar</button>
+        </div>
+    </div>
 
-    <!-- Admin Panel -->
+
     <div id="admin-panel" class="fixed top-0 right-0 h-full w-full max-w-lg bg-[#002776] text-white shadow-2xl p-6 transform translate-x-full z-50 overflow-y-auto">
         <div class="flex justify-between items-center mb-6">
             <h2 class="text-2xl font-bold text-[#FFDF00]">Painel de Administração</h2>
             <button id="close-admin-panel-btn" class="text-white hover:text-[#FFDF00] text-3xl font-bold">&times;</button>
         </div>
         <div id="admin-content" class="space-y-4">
-            <!-- Team list will be dynamically populated here -->
-        </div>
+            </div>
     </div>
 
 
@@ -408,16 +589,26 @@
             const closeAdminPanelBtn = document.getElementById('close-admin-panel-btn');
             const adminContent = document.getElementById('admin-content');
 
+            // --- NEW: Regulation Modal Elements ---
+            const regulationModal = document.getElementById('regulation-modal');
+            const regulationCheckbox = document.getElementById('regulation-checkbox');
+            const confirmRegulationBtn = document.getElementById('confirm-regulation-btn');
+            const regulationLink = document.getElementById('regulation-link');
+            const REGULATION_VERSION = 'cbfd_regulation_confirmed_v1.0'; // Update this to force re-confirmation
+
+            // --- NEW: Team Panel Elements ---
+            const teamPanel = document.getElementById('team-panel');
+            const lineupForm = document.getElementById('lineup-form');
+
             // --- Modal Logic ---
-            const showModal = () => authModal.style.display = 'flex';
-            const hideModal = () => authModal.style.display = 'none';
-            loginRegisterBtn.addEventListener('click', showModal);
-            loginRegisterBtnMobile.addEventListener('click', showModal);
-            closeModalBtn.addEventListener('click', hideModal);
+            const showModal = (modal) => modal.style.display = 'flex';
+            const hideModal = (modal) => modal.style.display = 'none';
+            loginRegisterBtn.addEventListener('click', () => showModal(authModal));
+            loginRegisterBtnMobile.addEventListener('click', () => showModal(authModal));
+            closeModalBtn.addEventListener('click', () => hideModal(authModal));
             window.addEventListener('click', (event) => {
-                if (event.target === authModal) {
-                    hideModal();
-                }
+                if (event.target === authModal) hideModal(authModal);
+                if (event.target === regulationModal) { /* Do nothing, force interaction */ }
             });
 
             // --- Mobile Menu Toggle ---
@@ -494,13 +685,44 @@
                 
                 if (foundUser) {
                     sessionStorage.setItem('cbfd_loggedInUser', JSON.stringify(foundUser));
-                    updateUIForLoggedInUser();
-                    hideModal();
+                    hideModal(authModal);
                     loginForm.reset();
+                    
+                    // NEW: Check for regulation confirmation
+                    const regulationConfirmed = localStorage.getItem(`${REGULATION_VERSION}_${foundUser.id}`);
+                    if (!regulationConfirmed) {
+                        showModal(regulationModal);
+                    } else {
+                        updateUIForLoggedInUser();
+                    }
                 } else {
                     loginError.classList.remove('hidden');
                 }
             });
+
+            // --- NEW: Regulation Confirmation Logic ---
+            regulationCheckbox.addEventListener('change', () => {
+                if (regulationCheckbox.checked) {
+                    confirmRegulationBtn.disabled = false;
+                    confirmRegulationBtn.classList.remove('bg-gray-400', 'cursor-not-allowed');
+                    confirmRegulationBtn.classList.add('bg-[#009739]', 'hover:bg-green-700');
+                } else {
+                    confirmRegulationBtn.disabled = true;
+                    confirmRegulationBtn.classList.add('bg-gray-400', 'cursor-not-allowed');
+                    confirmRegulationBtn.classList.remove('bg-[#009739]', 'hover:bg-green-700');
+                }
+            });
+            
+            confirmRegulationBtn.addEventListener('click', () => {
+                const loggedInUser = JSON.parse(sessionStorage.getItem('cbfd_loggedInUser'));
+                if (loggedInUser && regulationCheckbox.checked) {
+                    localStorage.setItem(`${REGULATION_VERSION}_${loggedInUser.id}`, 'true');
+                    hideModal(regulationModal);
+                    updateUIForLoggedInUser();
+                }
+            });
+            
+            regulationLink.addEventListener('click', () => hideModal(regulationModal));
 
             // --- Logout Logic ---
             const handleLogout = () => {
@@ -515,17 +737,22 @@
                 const loggedInUser = JSON.parse(sessionStorage.getItem('cbfd_loggedInUser'));
                 if (loggedInUser) {
                     const welcomeText = `Bem-vindo, ${loggedInUser.username}`;
-                    const balanceText = `Saldo: ${formatCurrency(loggedInUser.balance)}`;
+                    const balanceText = loggedInUser.type === 'time' ? `Saldo: ${formatCurrency(loggedInUser.balance)}` : '';
                     
                     // Desktop UI
-                    welcomeMessage.innerHTML = `${welcomeText} | <span class="text-[#FFDF00]">${balanceText}</span>`;
+                    welcomeMessage.innerHTML = `${welcomeText} ${loggedInUser.type === 'time' ? `| <span class="text-[#FFDF00]">${balanceText}</span>` : ''}`;
                     userSession.classList.remove('hidden');
                     loginRegisterBtn.classList.add('hidden');
                     
                     // Mobile UI
-                    welcomeMessageMobile.innerHTML = `${welcomeText}<br><span class="text-[#FFDF00]">${balanceText}</span>`;
+                    welcomeMessageMobile.innerHTML = `${welcomeText}<br>${loggedInUser.type === 'time' ? `<span class="text-[#FFDF00]">${balanceText}</span>` : ''}`;
                     userSessionMobile.classList.remove('hidden');
                     loginRegisterBtnMobile.classList.add('hidden');
+
+                    // NEW: Show team panel if user is a team
+                    if (loggedInUser.type === 'time') {
+                        teamPanel.classList.remove('hidden');
+                    }
                 }
             };
             
@@ -537,6 +764,9 @@
                 // Mobile UI
                 userSessionMobile.classList.add('hidden');
                 loginRegisterBtnMobile.classList.remove('hidden');
+
+                // NEW: Hide team panel on logout
+                teamPanel.classList.add('hidden');
             };
 
             // --- Admin Panel Logic ---
@@ -617,10 +847,43 @@
                 populateAdminPanel(); // Refresh the panel view
             });
             
+            // --- NEW: Accordion Logic ---
+            const accordionHeaders = document.querySelectorAll('.accordion-header');
+            accordionHeaders.forEach(header => {
+                header.addEventListener('click', () => {
+                    const content = header.nextElementSibling;
+                    const icon = header.querySelector('span');
+
+                    // Optional: Close other accordions
+                    accordionHeaders.forEach(otherHeader => {
+                        if (otherHeader !== header) {
+                            otherHeader.nextElementSibling.style.maxHeight = null;
+                            otherHeader.querySelector('span').classList.remove('rotate-45');
+                        }
+                    });
+
+                    if (content.style.maxHeight) {
+                        content.style.maxHeight = null;
+                        icon.classList.remove('rotate-45');
+                    } else {
+                        content.style.maxHeight = content.scrollHeight + 'px';
+                        icon.classList.add('rotate-45');
+                    }
+                });
+            });
+
+            // --- NEW: Lineup Form Logic ---
+            lineupForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                alert('Escalação enviada com sucesso!');
+                lineupForm.reset();
+            });
+
             // --- Initial Check on Page Load ---
             const checkLoginStatus = () => {
                 const loggedInUser = sessionStorage.getItem('cbfd_loggedInUser');
                 if (loggedInUser) {
+                    // Don't show regulation modal on page refresh if already confirmed in this session
                     updateUIForLoggedInUser();
                 } else {
                     updateUIForLoggedOutUser();
